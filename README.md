@@ -2,7 +2,7 @@
 
 Стартовый экран — таббар с двумя вкладками.
 
-<img src="https://github.com/vasiario/GetPhotoApp/assets/109281229/fa0972b5-157f-430a-8330-b199c3491a7c">
+<img src="https://github.com/vasiario/GetPhotoApp/assets/109281229/fa0972b5-157f-430a-8330-b199c3491a7c" width="250">
 
 На первой вкладке — коллекция случайных фотографий с https://unsplash.com. Вверху строка поиска по фотографиям с по https://unsplash.com. 
 
