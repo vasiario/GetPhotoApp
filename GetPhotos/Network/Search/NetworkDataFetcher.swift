@@ -8,30 +8,31 @@
 import UIKit
 
 class NetworkDataFetcher {
-    
-    var networkService = NetworkService()
-    
-    func fetchData(searchTerm: String, complition: @escaping (SearchResults?) -> ()){
-        networkService.request(searchTerm: searchTerm) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                complition(nil)
-            }
-            let decode = self.decodeJSON(type: SearchResults.self, from: data)
-            complition(decode)
-        }
+
+  var networkService = NetworkService()
+
+  // Функция для получения данных с сервера по заданному поисковому запросу
+  func fetchData(searchTerm: String, completion: @escaping (SearchResults?) -> ()) {
+    networkService.request(searchTerm: searchTerm) { (data, error) in
+      if let error = error {
+        print(error.localizedDescription)
+        completion(nil)
+      }
+      let decodedData = self.decodeJSON(type: SearchResults.self, from: data)
+      completion(decodedData)
     }
-    
-    // Универсальная функция для использования любой модели данных,должна быть подписана под протокол Decodable
-    func decodeJSON<T:Decodable>(type: T.Type, from: Data?) -> T? {
-        let decoder = JSONDecoder()
-        guard let data = from else { return nil}
-        do {
-            let objects = try decoder.decode(type.self, from: data)
-            return objects
-        } catch let error {
-            print(error)
-            return nil
-        }
+  }
+
+  // Универсальная функция для декодирования JSON-данных в объект заданного типа
+  func decodeJSON<T: Decodable>(type: T.Type, from data: Data?) -> T? {
+    let decoder = JSONDecoder()
+    guard let data = data, data != nil else { return nil }
+    do {
+      let decodedObjects = try decoder.decode(type.self, from: data)
+      return decodedObjects
+    } catch let error {
+      print(error)
+      return nil
     }
+  }
 }

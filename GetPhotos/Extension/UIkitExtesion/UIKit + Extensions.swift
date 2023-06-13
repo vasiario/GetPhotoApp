@@ -9,11 +9,13 @@ import UIKit
 
 extension UIView {
 
+  // Метод для добавления подпредставления к текущему представлению
   func addViews(_ view: UIView){
     self.addSubview(view)
     view.translatesAutoresizingMaskIntoConstraints = false
   }
 
+  // Метод для настройки метки (UILabel) с заданным текстом и размером шрифта
   func setUpLabel(text: String, fontSize: CGFloat) -> UILabel {
     let label = UILabel()
     label.text = text

@@ -9,24 +9,24 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-    private let photosVC = PhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    private let favoriteVC = FavouriteTableViewController()
+  private let photosVC = PhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+  private let favoriteVC = FavouriteTableViewController()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        viewControllers = [
-            setupNavigationController(for: photosVC, with: "PHOTOS", with: UIImage(systemName: "photo")!),
-            setupNavigationController(for: favoriteVC, with: "FAVORITE", with: UIImage(systemName: "star")!)
-        ]
+    viewControllers = [
+      setupNavigationController(for: photosVC, with: "PHOTOS", with: UIImage(systemName: "photo")!),
+      setupNavigationController(for: favoriteVC, with: "FAVORITE", with: UIImage(systemName: "star")!)
+    ]
 
-        photosVC.destinationVC.detailViewControllerDelegate = favoriteVC
-    }
+    photosVC.destinationVC.detailViewControllerDelegate = favoriteVC  // Устанавливаем делегата в `PhotosCollectionViewController` для обновления данных в `FavouriteTableViewController`
+  }
 
-    private func setupNavigationController (for rootViewController: UIViewController, with title: String, with image: UIImage) -> UINavigationController{
-        let navigationVC = UINavigationController(rootViewController: rootViewController)
-        navigationVC.tabBarItem.title = title
-        navigationVC.tabBarItem.image = image
-        return navigationVC
-    }
+  private func setupNavigationController(for rootViewController: UIViewController, with title: String, with image: UIImage) -> UINavigationController {
+    let navigationVC = UINavigationController(rootViewController: rootViewController)
+    navigationVC.tabBarItem.title = title
+    navigationVC.tabBarItem.image = image
+    return navigationVC
+  }
 }

@@ -7,28 +7,31 @@
 
 import UIKit
 
+// Структура, представляющая результаты поиска
 struct SearchResults: Decodable {
-    let total: Int
-    let results: [UnsplasPhotos]
+  let total: Int // Общее количество результатов
+  let results: [UnsplasPhotos] // Массив фотографий, полученных в результате поиска
 }
 
+// Структура, представляющая информацию о фотографии на Unsplash
 struct UnsplasPhotos: Decodable {
-    let id: String
-    let width: Int
-    let height: Int
-    let urls: [UrlKind.RawValue: String]
-    let user: UserInfo
-    
-    enum UrlKind: String {
-        case raw
-        case full
-        case regular
-        case small
-        case thumb
-    }
+  let id: String // Идентификатор фотографии
+  let width: Int // Ширина фотографии
+  let height: Int // Высота фотографии
+  let urls: [UrlKind.RawValue: String] // URL-адреса фотографии разных размеров
+  let user: UserInfo // Информация о пользователе, загрузившем фотографию
+
+  // Перечисление для различных типов URL-адресов фотографии
+  enum UrlKind: String {
+    case raw
+    case full
+    case regular
+    case small
+    case thumb
+  }
 }
 
+// Структура, представляющая информацию о пользователе
 struct UserInfo: Decodable {
-    let name: String
+  let name: String // Имя пользователя
 }
-

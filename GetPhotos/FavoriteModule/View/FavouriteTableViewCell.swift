@@ -1,8 +1,8 @@
 //
 //  FavoriteTableViewCell.swift
-//  PhotoAppWithUnsplash
+//  GetPhotos
 //
-//  Created by Павел Афанасьев on 12.10.2022.
+//  Created by vasiario on 13.06.2023.
 //
 
 import UIKit
