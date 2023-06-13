@@ -21,4 +21,4 @@
 
 При нажатии на ячейку — переход в экран подробной информации о выбранной фотографии.
 
-<img src="https://user-images.githubu
+<img src="https://user-images.githubu">
