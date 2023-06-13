@@ -21,4 +21,9 @@
 
 При нажатии на ячейку — переход в экран подробной информации о выбранной фотографии.
 
-<img src="https://user-images.githubu">
+<img src="https://user-images.githubusercontent.com/91372236/199483538-fffce74d-8088-4930-8f2d-cb4cb70ae851.png" width="250">
+
+### Как написан проект
+- Приложение выполнено с использованием фраемворков UIKit, SDWebImage.
+- Для работы с сетью использовался URLSession.
+- Вёрстка сделана кодом, без xib и storyboard, через Auto Layout.
