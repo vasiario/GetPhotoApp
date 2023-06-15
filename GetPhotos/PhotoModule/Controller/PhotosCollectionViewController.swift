@@ -38,8 +38,8 @@ class PhotosCollectionViewController: UICollectionViewController {
 
   private func setupSearchBar() {
     let searchBar = UISearchBar()
-    navigationItem.titleView = searchBar
     searchBar.delegate = self
+    navigationItem.titleView = searchBar
   }
 }
 
@@ -59,26 +59,26 @@ extension PhotosCollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-     let currentImage = photos[indexPath.item]
-     let photoID = currentImage.id
+    let currentImage = photos[indexPath.item]
+    let photoID = currentImage.id
 
-     networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
-       guard let fetchedDetailsPhoto = detailResult else { return }
+    networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
+      guard let fetchedDetailsPhoto = detailResult else { return }
 
-       self?.photoDetails = fetchedDetailsPhoto
-       self?.destinationVC.incomePhotoDetails = self?.photoDetails
-       self?.destinationVC.reloadLikeButton()
+      self?.photoDetails = fetchedDetailsPhoto
+      self?.destinationVC.incomePhotoDetails = self?.photoDetails
+      self?.destinationVC.reloadLikeButton()
 
-       if let navigationController = self?.navigationController {
-         if navigationController.viewControllers.contains(self!.destinationVC) {
-           navigationController.popToViewController(self!.destinationVC, animated: true)
-         } else {
-           navigationController.pushViewController(self!.destinationVC, animated: true)
-         }
-       }
-     }
-   }
- }
+      if let navigationController = self?.navigationController {
+        if navigationController.viewControllers.contains(self!.destinationVC) {
+          navigationController.popToViewController(self!.destinationVC, animated: true)
+        } else {
+          navigationController.pushViewController(self!.destinationVC, animated: true)
+        }
+      }
+    }
+  }
+}
 
 // MARK: - UISearchBarDelegate
 
@@ -94,8 +94,11 @@ extension PhotosCollectionViewController: UISearchBarDelegate {
       }
     })
   }
-}
 
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()  // Скрыть клавиатуру по нажатию на кнопку Search на клавиатуре
+  }
+}
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {

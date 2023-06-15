@@ -36,17 +36,12 @@ class DetailViewController: UIViewController {
     }
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    view.backgroundColor = .white
-  }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupViews()
     setConstraints()
     setupGesture()
+    view.backgroundColor = .white
   }
   
   // Настройка представлений
