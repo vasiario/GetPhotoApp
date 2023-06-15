@@ -46,30 +46,39 @@ class PhotosCollectionViewController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension PhotosCollectionViewController {
-
+  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return photos.count
   }
-
+  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCell.cellId, for: indexPath) as! PhotosCell
     let unsplashPhoto = photos[indexPath.item]
     cell.unsplashPhoto = unsplashPhoto
     return cell
   }
-
+  
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let currentImage = photos[indexPath.item]
-    let photoID = currentImage.id
-    networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
-      guard let fetchedDetailsPhoto = detailResult else { return }
-      self?.photoDetails = fetchedDetailsPhoto
-      self?.destinationVC.incomePhotoDetails = self?.photoDetails
-      self?.destinationVC.reloadLikeButton()
-      self?.navigationController?.pushViewController(self!.destinationVC, animated: true)
-    }
-  }
-}
+     let currentImage = photos[indexPath.item]
+     let photoID = currentImage.id
+
+     networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
+       guard let fetchedDetailsPhoto = detailResult else { return }
+
+       self?.photoDetails = fetchedDetailsPhoto
+       self?.destinationVC.incomePhotoDetails = self?.photoDetails
+       self?.destinationVC.reloadLikeButton()
+
+       if let navigationController = self?.navigationController {
+         if navigationController.viewControllers.contains(self!.destinationVC) {
+           navigationController.popToViewController(self!.destinationVC, animated: true)
+         } else {
+           navigationController.pushViewController(self!.destinationVC, animated: true)
+         }
+       }
+     }
+   }
+ }
 
 // MARK: - UISearchBarDelegate
 

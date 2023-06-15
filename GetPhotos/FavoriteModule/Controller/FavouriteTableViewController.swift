@@ -82,14 +82,55 @@ extension FavouriteTableViewController: DetailViewControllerProtocol {
 // MARK: - UITableViewDelegate
 
 extension FavouriteTableViewController {
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let currentPhoto = favouritePhotoArray[indexPath.row]
-    let photoID = currentPhoto.id
-    networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
-      guard let fetchedDetailsPhoto = detailResult else { return }
-      let destinationVC = DetailViewController()
-      destinationVC.incomePhotoDetails = fetchedDetailsPhoto
-      self?.navigationController?.pushViewController(destinationVC, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentPhoto = favouritePhotoArray[indexPath.row]
+        let photoID = currentPhoto.id
+        networkDetailDataFetcher.fetchData(photoId: photoID) { [weak self] detailResult in
+            guard let fetchedDetailsPhoto = detailResult else { return }
+            self?.detailViewController.incomePhotoDetails = fetchedDetailsPhoto
+            if let detailViewController = self?.detailViewController {
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        }
     }
-  }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Вызываем функцию для удаления элемента
+            deletePhoto(at: indexPath)
+        }
+    }
+
+    @objc func handleSwipeToDelete(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        guard let cell = gestureRecognizer.view as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+
+        // Вызываем функцию для удаления элемента
+        deletePhoto(at: indexPath)
+    }
+
+    private func deletePhoto(at indexPath: IndexPath) {
+        let currentImage = favouritePhotoArray[indexPath.row]
+
+        // Создаем алерт контроллер
+        let alertController = UIAlertController(title: "Удалить фотографию", message: "Вы уверены, что хотите удалить эту фотографию?", preferredStyle: .alert)
+
+        // Добавляем кнопку подтверждения
+        let confirmAction = UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+            // Выполняем операции удаления элемента из массива и таблицы
+            self?.favouritePhotoArray.remove(at: indexPath.row)
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        alertController.addAction(confirmAction)
+
+        // Добавляем кнопку отмены
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        // Отображаем алерт контроллер
+        present(alertController, animated: true, completion: nil)
+    }
 }
+

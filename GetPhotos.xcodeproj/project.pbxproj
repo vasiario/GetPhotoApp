@@ -97,14 +97,14 @@
 		09C96BCA2A38221100429CF7 /* GetPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				09C96BDF2A38223700429CF7 /* Application */,
 				09C96C102A3843D900429CF7 /* Extension */,
-				09C96C0D2A3843AD00429CF7 /* Resources */,
-				09C96C062A38434A00429CF7 /* DetailModule */,
-				09C96BF62A38422800429CF7 /* Network */,
 				09C96BF02A38344000429CF7 /* SupportingFiles */,
+				09C96C0D2A3843AD00429CF7 /* Resources */,
+				09C96BF62A38422800429CF7 /* Network */,
+				09C96C062A38434A00429CF7 /* DetailModule */,
 				09C96BE32A3825A800429CF7 /* FavoriteModule */,
 				09C96BE22A38258D00429CF7 /* PhotoModule */,
-				09C96BDF2A38223700429CF7 /* Application */,
 				09C96BD92A38221300429CF7 /* Info.plist */,
 			);
 			path = GetPhotos;

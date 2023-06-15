@@ -14,7 +14,7 @@ protocol DetailViewControllerProtocol: AnyObject {
 
 class DetailViewController: UIViewController {
   
-  // Слабая ссылка на делегата DetailViewControllerProtocol
+  // Слабая ссылка на делегат DetailViewControllerProtocol
   weak var detailViewControllerDelegate: DetailViewControllerProtocol?
   
   // Экземпляр DetailView
