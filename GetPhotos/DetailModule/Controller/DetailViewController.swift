@@ -27,9 +27,9 @@ class DetailViewController: UIViewController {
   var incomePhotoDetails: DetailResults?
   
   // Модель данных для отображения деталей фото
-  var unsplashPhoto: DetailResults! {
+  var unsplashPhoto: DetailResults? {
     didSet {
-      let photosUrl = unsplashPhoto.urls["regular"]
+      let photosUrl = unsplashPhoto?.urls["regular"]
       guard let imageUrl = photosUrl, let url = URL(string: imageUrl) else { return }
       // Загружаем фото из сети с помощью библиотеки SDWebImage
       detailView.photoImageView.sd_setImage(with: url)

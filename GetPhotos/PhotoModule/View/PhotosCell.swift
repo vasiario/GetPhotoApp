@@ -20,9 +20,9 @@ class PhotosCell: UICollectionViewCell {
     return photoImage
   }()
 
-  var unsplashPhoto: UnsplasPhotos! {
+  var unsplashPhoto: UnsplasPhotos? {
     didSet {
-      let photosUrl = unsplashPhoto.urls["regular"]
+      let photosUrl = unsplashPhoto?.urls["regular"]
       guard let imageUrl = photosUrl, let url = URL(string: imageUrl) else { return }
       photosImageView.sd_setImage(with: url)  // Используем SDWebImage для загрузки фото из сети
     }

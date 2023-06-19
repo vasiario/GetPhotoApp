@@ -26,7 +26,7 @@ class NetworkDataFetcher {
   // Универсальная функция для декодирования JSON-данных в объект заданного типа
   func decodeJSON<T: Decodable>(type: T.Type, from data: Data?) -> T? {
     let decoder = JSONDecoder()
-    guard let data = data, data != nil else { return nil }
+    guard let data = data else { return nil }
     do {
       let decodedObjects = try decoder.decode(type.self, from: data)
       return decodedObjects

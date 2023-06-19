@@ -36,10 +36,10 @@ class FavouriteTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteTableViewCell.cellId, for: indexPath) as! FavouriteTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteTableViewCell.cellId, for: indexPath) as? FavouriteTableViewCell
     let currentImage = favouritePhotoArray[indexPath.row]
-    cell.authorName.text = currentImage.user.name
-    cell.unsplashPhoto = currentImage
+    cell?.authorName.text = currentImage.user.name
+    cell?.unsplashPhoto = currentImage
 
     // Создаем кнопку удаления
         let deleteButton = UIButton(type: .system)
@@ -51,9 +51,13 @@ class FavouriteTableViewController: UITableViewController {
         deleteButton.tag = indexPath.row
 
         // Добавляем кнопку удаления в ячейку
-        cell.accessoryView = deleteButton
+    cell?.accessoryView = deleteButton
 
-    return cell
+    if let cell = cell {
+        return cell
+    } else {
+        return UITableViewCell()
+    }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -112,8 +116,6 @@ extension FavouriteTableViewController {
     }
 
     private func deletePhoto(at indexPath: IndexPath) {
-        let currentImage = favouritePhotoArray[indexPath.row]
-
         // Создаем алерт контроллер
         let alertController = UIAlertController(title: "Удалить фотографию", message: "Вы уверены, что хотите удалить эту фотографию?", preferredStyle: .alert)
 

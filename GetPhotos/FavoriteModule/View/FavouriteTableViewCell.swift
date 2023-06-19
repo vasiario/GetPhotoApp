@@ -26,9 +26,9 @@ class FavouriteTableViewCell: UITableViewCell {
         return label
     }()
     
-    var unsplashPhoto: DetailResults! {
+    var unsplashPhoto: DetailResults? {
         didSet {
-            let photosUrl = unsplashPhoto.urls["regular"]
+          let photosUrl = unsplashPhoto?.urls["regular"]
             guard let imageUrl = photosUrl, let url = URL(string: imageUrl) else { return }
             // Загружаем с помощью внешней библиотеки SDWebImage фото из сети
             photoImage.sd_setImage(with: url)
